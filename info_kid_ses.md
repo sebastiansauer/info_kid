@@ -3,7 +3,7 @@ info\_kid\_ses
 Sebastian Sauer
 4 11 2016
 
-My take on the kids' info challenge, building on @tjmahrs idea. See here: <https://twitter.com/annemscheel/status/794578875615498240>
+My take on the kids' info challenge, building on @tjmahrs ideas. See here: <https://twitter.com/annemscheel/status/794578875615498240>
 
 Original
 ========
@@ -17,9 +17,7 @@ source("./analysis/info_e4_ana.R")
 library(tidyverse)
 ```
 
-I was thinking whether the variable `correct` really is metric; if not, a count data analysis seems more appropriate. Even if it is not metric, it appears we are counting the number of correct responses (I haven't read the paper), so count analysis may still be appropriate.
-
-At any rate, I like @tjmahrs grey-formatting, and followed this approach.
+I was thinking whether the variable `correct` really is metric; if not, a count data analysis seems more appropriate. Even if it is not metric, it appears we are counting the number of correct responses from zero to four (I haven't read the paper), so count analysis may still be appropriate.
 
 First, let's get to know to the data a little more.
 
@@ -36,11 +34,12 @@ n_distinct(mss$age)
 ## [1] 21
 ```
 
-Let's bin age to half-year groups.
+Let's bin age to half-year groups, or bin to 2 groups, ie., round to the next year.
 
 ``` r
-# mss$age_bins <- cut(mss$age, breaks = c(2.99, 3.5, 4, 4.5, 5.01))
+mss$age_bins4 <- cut(mss$age, breaks = c(2.99, 3.5, 4, 4.5, 5.01))
 mss$age_bins <- cut(mss$age, breaks = c(2.99, 4, 5.01))
+mss$age_bins2 <- round(mss$age)
 
 n_distinct(mss$age_bins)
 ## [1] 2
